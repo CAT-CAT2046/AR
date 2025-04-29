@@ -6,25 +6,6 @@
         <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
-        <script>
-        AFRAME.registerComponent('custom-gesture-handler', {
-          init: function () {
-        const el = this.el;
-        let startPosition = null;
-        el.sceneEl.addEventListener('onefingermove', function (event) {
-          if (!startPosition) {
-            startPosition = el.object3D.position.clone();
-          }
-          const delta = event.detail.positionChange;
-          el.object3D.position.x = startPosition.x + delta.x;
-          el.object3D.position.y = startPosition.y + delta.y; // ← 上下にも対応
-        });
-        el.sceneEl.addEventListener('onefingerend', function () {
-        startPosition = null;
-        });
-        }
-        });
-        </script>
     </head>
 
     <body style="margin: 0; overflow: hidden;">
@@ -61,11 +42,11 @@
             >
                 <a-entity
                     id="bowser-model"
-                    scale="1.6 0.8 0.8"
+                    scale="2.4 0.8 0.8"
                     position="0 0 0"
                     rotation="0 270 90"
                     gltf-model="#animated-asset"
-                    custom-gesture-handler
+                    gesture-handler
                     wireframe="true"
                     animation="property: rotation; to:360 270 90; repeat:indefinite; loop:true; dur:6000; easing:linear"
                 >                    
