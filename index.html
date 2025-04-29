@@ -52,7 +52,10 @@
                 >                    
                 </a-entity>
             </a-marker>
-            <a-entity camera></a-entity>
+            <a-camera
+                arjs-look-controls='smoothingFactor: 0.1'
+                rotation-reader
+            ></a-camera>
         </a-scene>
     </body>
 </html>
