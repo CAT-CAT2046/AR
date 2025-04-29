@@ -29,7 +29,7 @@
             vr-mode-ui="enabled: false;"
             loading-screen="enabled: false;"
             renderer="logarithmicDepthBuffer: true;"
-            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+            arjs
             id="scene"
             embedded
             gesture-detector
@@ -55,14 +55,13 @@
                 <a-entity
                     id="bowser-model"
                     scale="0.41478536388473225 0.41478536388473225 0.41478536388473225"
-                    position="0 -2 0"
+                    position="0 -10 0"
                     rotation="0 270 90"
                     gltf-model="#animated-asset"
-                    class="clickable"
                     gesture-handler
                     wireframe="true"
                 >
-                    <a-animation attribute="position" from="0 -2 0" to="0 0 0" dur="5000" repeat="indefinite" begin="markerfound" end="markerlost">
+                    <a-animation attribute="position" from="0 -10 0" to="0 0 0" dur="5000" repeat="indefinite" begin="markerfound" end="markerlost">
                     </a-animation>
                 </a-entity>
             </a-marker>
