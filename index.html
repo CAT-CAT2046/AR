@@ -24,9 +24,25 @@
                     src="assets/asset.glb"
                 ></a-asset-item>
             </a-assets>
+
+            <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="assets/marker.patt"
+                smoothCount="10"
+                smoothTolerance=".01"
+                smoothThreshold="5"
+                smooth=“true”
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+                registerevents
+            >
                 <a-entity
                     id="bowser-model"
-                    scale="0.8 0.8 0.8"
+                    scale="0.5 0.5 0.5"
                     position="0 0 0"
                     rotation="0 270 90"
                     gltf-model="#animated-asset"
@@ -35,7 +51,7 @@
                     animation="property: rotation; to:360 270 90; repeat:indefinite; loop:true; dur:6000"
                 >                    
                 </a-entity>
-            <a-box position="5 0 -7" rotation="0 45 0" color="#4CC3D9"></a-box>
+            </a-marker>
             <a-camera
                  arjs-look-controls='smoothingFactor: 0.1'
                  rotation-reader
