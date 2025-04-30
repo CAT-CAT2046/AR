@@ -30,10 +30,7 @@
                 type="pattern"
                 preset="custom"
                 url="assets/marker.patt"
-                smooth="true"
-                smoothCount="10"
-                smoothTolerance=".01"
-                smoothThreshold="5"
+                smooth=“true”
                 raycaster="objects: .clickable"
                 emitevents="true"
                 cursor="fuse: false; rayOrigin: mouse;"
@@ -42,19 +39,17 @@
             >
                 <a-entity
                     id="bowser-model"
-                    scale="0.8 0.8 0.8"
+                    scale="0.4 0.4 0.4"
                     position="0 0 0"
                     rotation="0 270 90"
                     gltf-model="#animated-asset"
                     gesture-handler
-                    animation="property: rotation; to:360 270 90; repeat:indefinite; loop:true; dur:6000; easing:linear"
+                    wireframe="true"
+                    animation="property: rotation; to:360 270 90; repeat:indefinite; loop:true; dur:6000"
                 >                    
                 </a-entity>
             </a-marker>
-            <a-camera
-                arjs-look-controls='smoothingFactor: 0.1'
-                rotation-reader
-            ></a-camera>
+            <a-entity camera></a-entity>
         </a-scene>
     </body>
 </html>
