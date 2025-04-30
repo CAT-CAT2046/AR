@@ -73,7 +73,12 @@
                 preset="custom"
                 url="assets/marker2.patt"
                 >
-                <a-video src="#weavemv" position="0 0.5 -1.5" rotation="90 0 0" width="4" height="2.25"></a-video>
+                <a-entity 
+                  geometry="primitive: plane; height: 2.25; width: 4"
+                  material="shader: flat; src: #weavemv"
+                  position="0 0.5 -1.5"
+                  rotation="0 0 0">
+                </a-entity>
                 </a-marker>
             <a-camera
                  arjs-look-controls='smoothingFactor: 0.1'
