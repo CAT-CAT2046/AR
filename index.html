@@ -6,6 +6,7 @@
         <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+        <meta name="apple-mobile-web-app-capable" content="yes">
     </head>
     <body style="margin: 0; overflow: hidden;">
         <a-scene
@@ -24,9 +25,11 @@
                 ></a-asset-item>
                  <video
                     id="weavemv"
-                    loop
-                    autoplay
+                    loop="true"
                     muted
+                    autoplay
+                    webkit-playsinline 
+                    playsinline
                     crossorigin="anonymous"
                     src="video/weave.mp4"
                 ></video>
@@ -62,7 +65,7 @@
                 preset="custom"
                 url="assets/marker2.patt"
                 >
-                <a-video src="#weavemv" position="0 0.5 -1.5" rotation="0 0 0" width="4" height="2.25"></a-video>
+                <a-video src="#weavemv" position="0 0.5 -1.5" rotation="0 0 90" width="4" height="2.25"></a-video>
                 </a-marker>
             <a-camera
                  arjs-look-controls='smoothingFactor: 0.1'
