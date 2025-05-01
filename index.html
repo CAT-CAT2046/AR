@@ -43,10 +43,9 @@
     </a-marker>
 
     <!-- カメラとカーソル -->
-    <a-camera arjs-look-controls="smoothingFactor: 0.1">
+    <a-entity camera arjs-look-controls="smoothingFactor: 0.1"></a-entity>
       <a-cursor fuse="false" rayOrigin="mouse"></a-cursor>
-    </a-camera>
-  </a-scene>
+      </a-scene>
 
   <script>
     // ユーザー操作トリガーで動画を再生
