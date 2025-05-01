@@ -11,7 +11,7 @@
     src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js"></script>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi">
 </head>
 
 <body style="margin: 0; overflow: hidden;">
@@ -25,14 +25,14 @@
     <a-marker id="animated-marker" type="pattern" preset="custom" url="assets/marker.patt" smoothCount="10"
       smoothTolerance=".01" smoothThreshold="5" smooth="true" raycaster="objects: .clickable" emitevents="true"
       cursor="fuse: false; rayOrigin: mouse;">
-      <a-entity id="bowser-model" scale="0.4 0.4 0.4" position="0 0.5 0" rotation="90 -90 90"
+      <a-entity id="bowser-model" scale="0.4 0.4 0.4" position="0 0 0" rotation="90 -90 90"
         gltf-model="#animated-asset" wireframe="true"
         animation="property: rotation; from: 90 270 90; to: 450 270 90; repeat: indefinite; loop: true; dur: 6000; easing: linear; delay: 6000;">
       </a-entity>
     </a-marker>
     <a-marker id="mvmarker" type="pattern" preset="custom" url="assets/marker2.patt" smoothCount="10"
       smoothTolerance=".01" smoothThreshold="5" smooth="true">
-      <a-video src="#weavemv" position="0 0.5 0" rotation="-90 0 0" width="2" height="1.125"></a-video>
+      <a-video src="#weavemv" position="0 0 0" rotation="-90 0 0" width="2" height="1.125"></a-video>
     </a-marker>
     <a-camera arjs-look-controls='smoothingFactor: 0.1' rotation-reader position="0 1.6 0"></a-camera>
     <a-entity cursor="rayOrigin: mouse"></a-entity>
