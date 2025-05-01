@@ -4,6 +4,7 @@
 <head>
   <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <!--script
     src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
   <script
@@ -24,14 +25,29 @@
       </a-entity>
     </a-marker>
     <a-marker id="mvmarker" type="pattern" preset="custom" url="assets/marker2.patt">
-      <a-video src="#weavemv" position="0 2 0" rotation="0 0 0" width="2" height="1.125"></a-video>
+      <a-video src="#weavemv" position="0 2 0" rotation="-90 0 0" width="2" height="1.125"></a-video>
     </a-marker>
     <a-camera arjs-look-controls='smoothingFactor: 0.1' rotation-reader></a-camera>
     <a-entity cursor="rayOrigin: mouse"></a-entity>
   </a-scene>
 
   <script>
-  </script>
+  // DOM読み込み後
+  window.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('#weavemv');
+    const marker = document.querySelector('#mvmarker');
+
+    marker.addEventListener('markerFound', () => {
+      video.play().catch((e) => {
+        console.warn("Video play error:", e);
+      });
+    });
+
+    marker.addEventListener('markerLost', () => {
+      video.pause();
+    });
+  });
+</script>
 </body>
 
 </html>
