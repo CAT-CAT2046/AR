@@ -1,32 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
-  <title>AR Example2</title>
-  <!-- A-Frameを読み込む -->
-  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-  <!-- AR.js(A-Frame用)を読み込む -->
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  <script
+    src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+  <script
+    src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi">
 </head>
 
-<body style="margin: 0; overflow: hidden">
-  <!-- シーンを作成 -->
-  <a-scene embedded arjs="sourceType: webcam;">
+<body style="margin: 0; overflow: hidden;">
+  <a-scene vr-mode-ui="enabled: false;" loading-screen="enabled: false;" renderer="logarithmicDepthBuffer: true;"
+    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;" id="scene" embedded gesture-detector>
     <a-assets>
-      <!-- 3Dモデルを読み込む -->
-      <a-asset-items id="Strawberry" src="./asset.glb"></a-asset-items>
+      <a-asset-item id="animated-asset" src="assets/asset.glb"></a-asset-item>
+      <video id="weavemv" loop="true" muted autoplay webkit-playsinline playsinline src="video/weave.mp4"></video>
     </a-assets>
-    <!-- マーカー（今回はhiroマーカー）を検出して立方体を表示する -->
-    <!-- emitevents=true でマーカーの検出イベントを有効にする -->
-    <a-marker preset="./asset/marker" emitevents="true">
-      <!-- 3Dモデルを呼び出す -->
-      <!-- gltfファイル（a-gltf-modelタグ）-->
-      <!-- <a-gltf-model scr="#Strawberry"></a-gltf-model> ←なぜか表示されない場合がある -->
-      <a-entity position="0 0 0" rotation="0 0 0" scale="0.7 0.7 0.7" gltf-model="#Strawberry">
+
+    <a-marker id="animated-marker" type="pattern" preset="custom" url="assets/marker.patt" smoothCount="10"
+      smoothTolerance=".01" smoothThreshold="5" smooth="true" raycaster="objects: .clickable" emitevents="true"
+      cursor="fuse: false; rayOrigin: mouse;">
+      <a-entity id="bowser-model" scale="0.4 0.4 0.4" position="0 0 0" rotation="90 -90 90" gltf-model="#animated-asset"
+        wireframe="true"
+        animation="property: rotation; from: 90 270 90; to: 450 270 90; repeat: indefinite; loop: true; dur: 6000; easing: linear; delay: 6000;">
+      </a-entity>
     </a-marker>
-    <a-entity camera></a-entity>
+    <a-marker id="mvmarker" type="pattern" preset="custom" url="assets/marker2.patt" smoothCount="10"
+      smoothTolerance=".01" smoothThreshold="5" smooth="true">
+      <a-video src="#weavemv" position="0 0 0" rotation="-90 0 0" width="2" height="1.125"></a-video>
+    </a-marker>
+    <a-camera arjs-look-controls='smoothingFactor: 0.1' rotation-reader position="0 1.6 0"></a-camera>
+    <a-entity cursor="rayOrigin: mouse"></a-entity>
   </a-scene>
+
   <script>
     document
       .querySelector("a-marker")
@@ -39,7 +51,25 @@
       .addEventListener("markerLost", (event) => {
         console.log("Marker Lost", event);
       });
+    window.addEventListener('click', function () {
+      const video = document.getElementById('weavemv');
+      if (video.paused) {
+        video.play().catch(function (error) {
+          console.error('動画の再生に失敗しました:', error);
+        });
+      }
+    });
+    window.addEventListener('touchstart', function () {
+      const video = document.getElementById('weavemv');
+      if (video.paused) {
+        video.play().catch(function (error) {
+          console.error('動画の再生に失敗しました:', error);
+        });
+      }
+    });
   </script>
 </body>
 
 </html>
+
+<!-- Kohenyan Kohenyan -->
