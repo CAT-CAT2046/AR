@@ -78,13 +78,23 @@
              ></a-camera>
             <a-entity cursor="rayOrigin: mouse"></a-entity>
         </a-scene>
-        <script>
-            window.addEventListener('click', function () {
-            const video = document.querySelector('#weavemv');
-            if (video && video.paused) {
-              video.play().catch(err => console.warn('Autoplay failed:', err));
-            }
-          });
-        </script>
+　　<script>
+  window.addEventListener('click', function () {
+    const video = document.getElementById('weavemv');
+    if (video.paused) {
+      video.play().catch(function (error) {
+        console.error('動画の再生に失敗しました:', error);
+      });
+    }
+  });
+  window.addEventListener('touchstart', function () {
+    const video = document.getElementById('weavemv');
+    if (video.paused) {
+      video.play().catch(function (error) {
+        console.error('動画の再生に失敗しました:', error);
+      });
+    }
+  });
+    </script>
     </body>
 </html>
