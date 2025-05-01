@@ -1,102 +1,64 @@
 <!doctype html>
-<html>
-    <head>
-        <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-        <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js"></script>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    </head>
-    <body style="margin: 0; overflow: hidden;">
-        <a-scene
-            vr-mode-ui="enabled: false;"
-            loading-screen="enabled: false;"
-            renderer="logarithmicDepthBuffer: true;"
-            arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
-            id="scene"
-            embedded
-            gesture-detector
-        > 
-            <a-assets>
-                <a-asset-item
-                    id="animated-asset"
-                    src="assets/asset.glb"
-                ></a-asset-item>
-                 <video
-                    id="weavemv"
-                    loop="true"
-                    muted
-                    autoplay
-                    webkit-playsinline 
-                    playsinline
-                    src="video/weave.mp4"
-                ></video>
-            </a-assets>
+<html lang="ja">
 
-            <a-marker
-                id="animated-marker"
-                type="pattern"
-                preset="custom"
-                url="assets/marker.patt"
-                smoothCount="10"
-                smoothTolerance=".01"
-                smoothThreshold="5"
-                smooth="true"
-                raycaster="objects: .clickable"
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-            >
-                <a-entity
-                    id="bowser-model"
-                    scale="0.4 0.4 0.4"
-                    position="0 0.5 0"
-                    rotation="90 -90 90"
-                    gltf-model="#animated-asset"
-                    wireframe="true"
-                    animation="property: rotation; from: 90 270 90; to: 450 270 90; repeat: indefinite; loop: true; dur: 6000; easing: linear; delay: 6000;"
-                >                    
-                </a-entity>
-            </a-marker>
-            <a-marker
-                id="mvmarker"
-                type="pattern"
-                preset="custom"
-                url="assets/marker2.patt"
-                smoothCount="10"
-                smoothTolerance=".01"
-                smoothThreshold="5"
-                smooth="true"
-                >
-                <a-video src="#weavemv" position="0 0.5 0" rotation="-90 0 0" width="2" height="1.125"></a-video>
-                </a-marker>
-            <a-camera
-                 arjs-look-controls='smoothingFactor: 0.1'
-                 rotation-reader
-             ></a-camera>
-            <a-entity cursor="rayOrigin: mouse"></a-entity>
-        </a-scene>
-　　<script>
-  window.addEventListener('click', function () {
-    const video = document.getElementById('weavemv');
-    if (video.paused) {
-      video.play().catch(function (error) {
-        console.error('動画の再生に失敗しました:', error);
-      });
-    }
-  });
-  window.addEventListener('touchstart', function () {
-    const video = document.getElementById('weavemv');
-    if (video.paused) {
-      video.play().catch(function (error) {
-        console.error('動画の再生に失敗しました:', error);
-      });
-    }
-  });
-    </script>
-    </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>AR Example</title>
+  <!-- A-Frame core -->
+  <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+  <!-- AR.js for A-Frame -->
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.3.2/aframe/build/aframe-ar.js"></script>
+  <!-- A-Frame Extras loaders -->
+  <script src="https://unpkg.com/aframe-extras@6.1.1/dist/aframe-extras.loaders.min.js"></script>
+  <!-- Gesture support -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/@ar-js-org/studio-backend@latest/src/modules/marker/tools/gesture-detector.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@ar-js-org/studio-backend@latest/src/modules/marker/tools/gesture-handler.js"></script>
+</head>
+
+<body style="margin:0;overflow:hidden;">
+  <a-scene embedded vr-mode-ui="enabled: false" loading-screen="enabled: false" renderer="logarithmicDepthBuffer: true"
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false" gesture-detector>
+    <a-assets>
+      <a-asset-item id="animated-asset" src="assets/asset.glb"></a-asset-item>
+      <video id="weavemv" src="video/weave.mp4" loop muted playsinline webkit-playsinline></video>
+    </a-assets>
+
+    <!-- 3Dモデル用マーカー -->
+    <a-marker type="pattern" url="assets/marker.patt" smooth="true" smoothCount="10" smoothTolerance="0.01"
+      smoothThreshold="5" emitevents="true">
+      <a-entity id="bowser-model" gltf-model="#animated-asset" scale="0.4 0.4 0.4" position="0 0.5 0"
+        rotation="90 -90 90" material="wireframe: true"
+        animation="property: rotation; from: 90 270 90; to: 450 270 90; loop: true; dur: 6000; easing: linear; delay: 6000"
+        gesture-handler></a-entity>
+    </a-marker>
+
+    <!-- 動画表示用マーカー -->
+    <a-marker type="pattern" url="assets/marker2.patt" smooth="true" smoothCount="10" smoothTolerance="0.01"
+      smoothThreshold="5">
+      <a-video src="#weavemv" position="0 0.5 0" rotation="-90 0 0" width="2" height="1.125"></a-video>
+    </a-marker>
+
+    <!-- カメラとカーソル -->
+    <a-camera arjs-look-controls="smoothingFactor: 0.1">
+      <a-cursor fuse="false" rayOrigin="mouse"></a-cursor>
+    </a-camera>
+  </a-scene>
+
+  <script>
+    // ユーザー操作トリガーで動画を再生
+    document.body.addEventListener('click', () => {
+      const video = document.getElementById('weavemv');
+      if (video.paused) video.play().catch(e => console.error('動画再生失敗', e));
+    });
+    document.body.addEventListener('touchstart', () => {
+      const video = document.getElementById('weavemv');
+      if (video.paused) video.play().catch(e => console.error('動画再生失敗', e));
+    });
+  </script>
+</body>
+
 </html>
-
-<!-- Kohenyan Kohenyan -->
